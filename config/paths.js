@@ -4,7 +4,7 @@ const paths = {
     dest: 'build'
   },
   sass: {
-    src: 'docs/docs.scss',
+    src: './grap-ui.scss',
     dest: 'build',
     watch: ['docs/sass/*.scss', 'scss/*.scss', 'docs/docs.scss', 'grap-ui.scss']
   },
