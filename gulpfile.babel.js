@@ -5,7 +5,7 @@ import sass from 'gulp-sass'
 import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
-import gutil from 'gulp-util'
+import connect from 'gulp-connect'
 import webpack from 'gulp-webpack'
 import paths from './config/paths'
 import webpackConfig from './webpack.config.babel'
@@ -27,7 +27,34 @@ gulp.task('webpack', () => {
            .pipe(gulp.dest('docs/js'))
 })
 
-gulp.task('default', () => {
-  console.log('[gulp#default] started')
-
+gulp.task('connect', () => {
+  connect.server({
+    root: 'docs',
+    livereload: true
+  })
 })
+
+gulp.task('html', () => {
+  gulp.src('./docs/index.html')
+  .pipe(connect.reload())
+})
+
+gulp.task('js', () => {
+  gulp.src('./js/**.js')
+  .pipe(connect.reload())
+})
+
+gulp.task('css', () => {
+  gulp.src('./scss/**.scss')
+  .pipe(connect.reload())
+})
+
+
+gulp.task('watch', () => {
+  gulp.watch(['./docs/index.html'], ['html'])
+  gulp.watch(['./js/**.js'], ['webpack', 'js'])
+  gulp.watch(['./scss/**.scss'], ['sass', 'css'])
+  gulp.watch(['./grap-ui.scss'], ['sass', 'css'])
+})
+
+gulp.task('default',['connect', 'watch'])
