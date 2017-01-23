@@ -21,6 +21,6 @@ const paths = {
     src: 'js/index.js',
     dest: 'build'
   }
-};
+}
 
 module.exports = paths
