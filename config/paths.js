@@ -5,7 +5,7 @@ const paths = {
   },
   sass: {
     src: './grap-ui.scss',
-    dest: 'build',
+    dest: 'build/css',
     watch: ['docs/sass/*.scss', 'scss/*.scss', 'docs/docs.scss', 'grap-ui.scss']
   },
   img: {
@@ -16,6 +16,10 @@ const paths = {
     src: 'docs/index.html',
     dest: 'build',
     watch: ['docs/html/*.html', 'docs/index.html']
+  },
+  js: {
+    src: 'js/index.js',
+    dest: 'build'
   }
 };
 
