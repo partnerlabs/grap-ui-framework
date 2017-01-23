@@ -15,7 +15,7 @@ gulp.task('sass', () => {
     .pipe(gulp.dest(paths.sass.dest))
     .pipe(concat('grap-ui.css'))
     .pipe(gulp.dest('dist/css'))
-    .pipe(gulp.dest('docs/css'))
+    .pipe(gulp.dest('docs/css`'))
 })
 
 gulp.task('eslint', () => {
