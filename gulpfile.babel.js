@@ -2,6 +2,7 @@
 
 import gulp from 'gulp'
 import sass from 'gulp-sass'
+import autoprefixer from 'gulp-autoprefixer'
 import concat from 'gulp-concat'
 import connect from 'gulp-connect'
 import webpack from 'gulp-webpack'
@@ -13,6 +14,10 @@ import webpackConfig from './webpack.config.babel'
 gulp.task('sass', ['scsslint'], () => {
   return gulp.src(paths.sass.src)
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(gulp.dest(paths.sass.dest))
     .pipe(concat('grap-ui.css'))
     .pipe(gulp.dest('dist/css'))
