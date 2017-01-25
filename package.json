@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "authors": [
+    "ChangJoo Park <pcjpcj2@gmail.com>"
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.22.1",
