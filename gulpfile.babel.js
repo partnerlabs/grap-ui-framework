@@ -69,7 +69,7 @@ gulp.task('css', () => {
 gulp.task('watch', () => {
   gulp.watch(['./docs/index.html'], ['html'])
   gulp.watch(['./js/**.js'], ['webpack', 'js'])
-  gulp.watch(['./scss/**.scss'], ['sass', 'css'])
+  gulp.watch(['./scss/**/**.scss'], ['sass', 'css'])
   gulp.watch(['./grap-ui.scss'], ['sass', 'css'])
 })
 
