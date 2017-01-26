@@ -1,40 +1,7 @@
-// Utils
-@import 'utils/variables';
-@import 'utils/functions';
-@import 'utils/mixins';
-@import 'utils/helpers';
-
-// Vendors
-
-// Base
-@import 'base/reset';
-@import 'base/typography';
-@import 'base/base';
-
-// Layout
-@import 'layout/navigation';
-@import 'layout/grid';
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/sidebar';
-@import 'layout/forms';
-
-// Components
-@import 'components/buttons';
-@import 'components/carousel';
-@import 'components/dropdown';
-@import 'components/media';
-@import 'components/list';
-@import 'components/badge';
-@import 'components/breadcrumb';
-@import 'components/tab';
-@import 'components/modal';
-@import 'components/tooltip';
-@import 'components/loader';
-
-// Pages
-@import 'pages/landing';
-
-// Themes
-@import 'themes/theme';
-@import 'themes/admin';
+@import 'utils/all';
+@import 'vendor/all';
+@import 'base/all';
+@import 'layout/all';
+@import 'components/all';
+@import 'pages/all';
+@import 'themes/all';
