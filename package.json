@@ -9,7 +9,7 @@
   "sasslintConfig": ".sass-lint.yml",
   "authors": [
     "ChangJoo Park <pcjpcj2@gmail.com>",
-    "ChungJin Kim <me@puding.kr>"
+    "Cheongjin Kim <me@puding.kr>"
   ],
   "license": "ISC",
   "devDependencies": {
