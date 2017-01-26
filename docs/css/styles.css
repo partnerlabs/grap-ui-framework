@@ -18,6 +18,7 @@
 .document .item.narrow {
   background-color: #2786D5;
   height: 2rem;
+  overflow: hidden;
 }
 
 /* 문서용 타이포그라피 */
