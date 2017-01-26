@@ -15,7 +15,7 @@
   text-align: center;
   font-family: monospace;
 }
-.document.item.box {
+.document.item.narrow {
   background-color: #2786D5;
   height: 2rem;
 }
