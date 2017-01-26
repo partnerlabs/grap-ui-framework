@@ -1,0 +1,56 @@
+/**
+* 버튼 설정
+* 버튼의 색은 기본 색상을 기준으로 결정합니다.
+* 버튼의 종류는 default, primary, success, warning, danger 입니다.
+*/
+$button-white: $white;
+$button-black: $black;
+$button-gray: $gray;
+$button-green: $green;
+$button-red: $red;
+$button-yellow: $yellow;
+$button-blue: $blue;
+
+.button {
+  padding: 8px 13px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-weight: normal;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+
+/**
+* 기본 버튼 외 버튼 생성
+* 버튼의 목록은 $button-colors 리스트를 이용합니다.
+* 리스트 항목의 구성은 클래스이름_버튼색_글자색 입니다. 추후 변경이 필요합니다.
+*/
+$button-colors:  (button-primary $button-blue white, button-success $button-green white, button-warning $button-yellow white, button-danger $button-red white);
+
+/**
+* 색상에 따른 버튼 클래스 생성
+* 실제 버튼에서 사용할 클래스를 생성합니다.
+* 현재 기본상태와 hover만 작성하였습니다.
+*/
+.button {
+  @each $type in $button-colors {
+    &.#{nth($type, 1)} {
+      background-color: #{nth($type, 2)};
+      color: #{nth($type, 3)};
+      &:hover {
+        background-color: darken(nth($type, 2), 5%);
+      }
+    }
+  }
+}
+
+/**
+* TODO: 크기에 따른 버튼 클래스 생성
+*/
+
+/**
+* TODO: 상태에 따른 버튼 클래스 생성
+*/
