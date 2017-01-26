@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "sasslintConfig": ".sass-lint.yml",
   "authors": [
     "ChangJoo Park <pcjpcj2@gmail.com>",
     "ChungJin Kim <me@puding.kr>"
