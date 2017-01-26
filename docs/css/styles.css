@@ -1,0 +1,32 @@
+/* 문서용 container */
+.document .container {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* 그리드 레이아웃 용 아이템*/
+.document .item {
+  background-color: #2786D5;
+  border-radius: 2px;
+  display: block;
+  height: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  line-height: 2rem;
+  color: white;
+  text-align: center;
+  font-family: monospace;
+}
+
+/* 문서용 타이포그라피 */
+
+
+/* 문서용 코드 박스 */
+.document .code-box {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.document .question {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
