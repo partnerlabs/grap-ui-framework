@@ -1,0 +1,176 @@
+/**
+ * 그리드 레이아웃 설정
+ *
+ * 그리드 레이아웃은 $columns와 $gutter 기반으로 공간의 크기를 결정합니다.
+ * $columns 은 화면을 몇등분 할 지 결정합니다.
+ * $gutter 각 칼럼 간 공백의 크기를 결정합니다.
+ *
+ * 그리드 레이아웃은 변수 columns, rows, offsets 를 사용합니다.
+ * $class-row : 행에 대한 클래스 입니다.
+ * $class-column : 열에 대한 클래스 이름 입니다.
+ * $class-offset : 오프셋 클래스 이름 입니다.
+ */
+$columns: 12 !default;
+$gutter: 0.5rem !default;
+
+$class-row: 'row' !default;
+$class-column: 'column' !default;
+$class-offset: 'offset' !default;
+
+/**
+ * 브레이크 포인트 네임스페이스
+ *
+ * 각 화면의 크기 별 네임스페이스를 지정합니다.
+ *
+ * $breakpoints 는 Sass 리스트입니다. 각 서브 리스트는 두가지 내용을 포함합니다
+ * 1. 브레이크 포인트에 대한 네임스페이스 (필수) (예: xs, sm, md, lg)
+ * 2. 브레이크 포인트로 사용할 최소 길이 (예: 48em, 62em, 75em)
+ *
+ * 참고 : 적절한 크기로 지정해야 합니다.
+ *
+ * 참고: 값을 생략하면 그리드를 생성하고 전역 스타일에 적용 할 때 생략합니다.
+ * 
+ *
+ */
+$breakpoints: (
+  (xs),
+  (sm, 768px),
+  (md, 992px),
+  (lg, 1200px)
+) !default;
+
+/**
+ * 클래스 이름 기본값
+ *
+ * 다른 라이브러리와의 호환성이 필요한 경우 열,행 및 오프셋의 클래스 이름을 변경해야 합니다.
+ */
+
+/**
+ * 칼럼 크기를 지정합니다. (퍼센트 기반)
+ */
+@function get-col-percent($column-num) {
+
+  @return $column-num / $columns * 100%;
+
+}
+
+/**
+ * 마진과 패팅을 지정합니다.
+ */
+@mixin spacing( $value, $type: margin, $orientation: vertical ) {
+  @if $orientation == vertical {
+    #{ $type }-top: $value;
+    #{ $type }-bottom: $value;
+  } @else {
+    #{ $type }-left: $value;
+    #{ $type }-right: $value;
+  }
+}
+
+/**
+ * flex box를 부모로 하는 행에 대한 래퍼클래스 입니다.
+ */
+.#{ $class-row } {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  @include spacing( ( -$gutter ), margin, horizontal );
+}
+
+
+%#{ $class-column } {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-height: 1px;
+  @include spacing( ( $gutter ), padding, horizontal );
+}
+
+%#{ $class-column }-flex {
+  @extend %#{ $class-column };
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+}
+
+
+/**
+ * 그리드 레이아웃에서 사용할 칼럼 클래스를 생성합니다.
+ *
+ * .#{ $class-column }-[namespace] 기본 칼럼 사용 방법 입니다.
+ * .#{ $class-column }-[namespace]-[number] 특정 크기를 가지는 칼럼을 생성합니다. (숫자는 1-12 )
+ * .#{ $class-offset }-[namespace]-[number] 오프셋에 대한 크기를 지정합니다. (숫자는 1-11)
+ * .#{ $class-offset }-[namespace]-reset 칼럼 오프셋에 대한 리셋을 지정합니다.
+ */
+
+@mixin grid-base( $namespace ) {
+  .#{ $class-column }-#{$namespace} {
+    @extend %#{ $class-column }-flex;
+  }
+
+  @for $i from 1 through $columns {
+    .#{ $class-column }-#{$namespace}-#{$i} {
+      @extend %#{ $class-column };
+    }
+  }
+}
+
+@mixin grid-sizes( $namespace ) {
+
+  // 지정된 만큼 칼럼을 생성합니다.
+  @for $i from 1 through $columns {
+    .#{ $class-column }-#{$namespace}-#{$i} {
+      flex-basis: get-col-percent($i);
+      max-width:  get-col-percent($i);
+    }
+  }
+
+  @for $i from 1 through $columns {
+
+    // 마지막 칼럼에는 .offset 클래스를 추가하지 않습니다.
+    @if ( $i != $columns ) {
+      .#{ $class-offset }-#{$namespace}-#{$i} {
+        margin-left: get-col-percent($i);
+      }
+    }
+
+  }
+
+  .#{ $class-offset }-#{$namespace}-reset {
+    margin-left: 0;
+  }
+
+}
+
+
+/**
+ * 파일 크기를 최소화하기 위하여 두 단계로 나누어 만듭니다.
+ * 1, 그리드 레이아웃에 대한 기본이 되는 네임스페이스를 만듭니다.
+ * 2, 각 네임스페이스에 대하여 칼럼/오프셋의 크기를 미디어 쿼리 기반으로 계산합니다.
+ */
+@each $val in $breakpoints {
+
+  $namespace: nth($val, 1);
+  @include grid-base( $namespace );
+
+}
+
+@each $val in $breakpoints {
+  @if length($val) == 1 {
+
+    $namespace: nth($val, 1);
+    @include grid-sizes( $namespace );
+
+  } @else {
+
+    $namespace: nth($val, 1);
+    $size: nth($val, 2);
+
+    @media only screen and (min-width: #{$size}) {
+      @include grid-sizes( $namespace );
+    }
+  }
+}
